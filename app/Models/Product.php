@@ -14,4 +14,7 @@ class Product extends Model
     public function orders(){
         return $this->hasMany(Order::class);
     }
+    public function location(){
+        return $this->belongsTo(Location::class);
+    }
 }

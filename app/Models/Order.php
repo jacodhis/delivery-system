@@ -8,16 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
-    protected $guarded =[];
+    protected $guarded = [];
 
     public function status(){
         return $this->belongsTo(Status::class);
    }
-   public function customer(){
+   public function user(){
     return $this->belongsTo(User::class);
    }
     public function product(){
         return $this->belongsTo(Product::class);
+    }
+    public function location(){
+        return $this->belongsTo(Location::class);
     }
 
 }

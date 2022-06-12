@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 
-
-@section('title')
-    
+@section('content')
+<home-component />
+{{-- <example-component /> --}}
+ {{-- <router-view></router-view> --}}
 @endsection

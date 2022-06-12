@@ -18,12 +18,13 @@ class ProductSeeder extends Seeder
     {
         //
         $faker = Faker::create();
-        $products = 20;
+        $products = 10;
 
         for($i=0;$i<$products; $i++){
             Product::create([
                 'name'=>  $faker->name(),
                 'description'=> $faker->sentence(),
+                'location_id'=>rand(1,2)
             ]);
         }
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\product;
-use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -14,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::paginate();
+        return view('product.index',compact('products'));
     }
 
     /**
@@ -24,7 +25,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -33,8 +34,13 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
+        $product = Product::create($request->all());
+        if($product){
+            return redirect()->route('product.index');
+        }
+        return back()->with('error','product not inserted successfully');
         //
     }
 
@@ -46,7 +52,7 @@ class ProductController extends Controller
      */
     public function show(product $product)
     {
-        //
+       return view('products.index',compact('product'));
     }
 
     /**
@@ -57,7 +63,7 @@ class ProductController extends Controller
      */
     public function edit(product $product)
     {
-        //
+        return view('products.edit',compact('product'));
     }
 
     /**
@@ -67,9 +73,10 @@ class ProductController extends Controller
      * @param  \App\Models\product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, product $product)
+    public function update(ProductRequest $request, product $product)
     {
-        //
+        $product->update($request->all());
+        return redirect()->route('product.index')->with('success','product updated successfully');
     }
 
     /**
@@ -80,6 +87,8 @@ class ProductController extends Controller
      */
     public function destroy(product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('product.index')->with('success','product deleted successfully');
+
     }
 }
