@@ -22,7 +22,10 @@ class OrderController extends Controller
     }
     public function show(User $customer)
     {
-         return OrderResource::collection($customer->orders);
+        $orders = Order::where('user_id',$customer->id)
+                        ->with('product')->get();
+       
+         return OrderResource::collection($orders);
     }
 
 }
