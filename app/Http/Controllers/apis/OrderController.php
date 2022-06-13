@@ -23,7 +23,9 @@ class OrderController extends Controller
     public function show(User $customer)
     {
         $orders = Order::where('user_id',$customer->id)
-                        ->with(['product,location'])->get();
+                        ->with('product')
+                        ->with('location')
+                        ->paginate();
        
          return OrderResource::collection($orders);
     }
