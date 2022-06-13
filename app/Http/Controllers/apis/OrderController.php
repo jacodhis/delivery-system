@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\apis;
 
+use App\Models\User;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Requests\orderRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\OrderResource;
 
 class OrderController extends Controller
 {
@@ -18,4 +20,9 @@ class OrderController extends Controller
             'status_id'=>1
         ]);
     }
+    public function show(User $customer)
+    {
+         return OrderResource::collection($customer->orders);
+    }
+
 }

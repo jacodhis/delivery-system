@@ -29,6 +29,7 @@ Route::get('/products', [ProductController::class, 'index'])->name('product.inde
 Route::get('/product/show/{product}', [ProductController::class, 'show'])->name('product.show');
 
 Route::post('/order', [OrderController::class, 'store'])->name('orders.store');
+Route::get('/order/{customer}', [OrderController::class, 'show'])->name('orders.show');
 
 Route::get('/locations', [LocationController::class, 'index'])->name('locations.index');
 
