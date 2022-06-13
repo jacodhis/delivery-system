@@ -25,6 +25,7 @@ class OrderController extends Controller
         $orders = Order::where('user_id',$customer->id)
                         ->with('product')
                         ->with('location')
+                        ->with('status')
                         ->paginate();
        
          return OrderResource::collection($orders);
